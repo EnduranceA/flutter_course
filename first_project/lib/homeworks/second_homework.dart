@@ -14,8 +14,8 @@ class _SecondHomeworkState extends State<SecondHomework> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-        title: const Text('Домашняя работа №2')),
+      appBar: AppBar(
+          title: const Text('Домашняя работа №2')),
     );
   }
 

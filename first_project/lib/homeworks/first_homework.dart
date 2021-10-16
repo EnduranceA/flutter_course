@@ -31,25 +31,25 @@ class _FirstHomeworkState extends State<FirstHomework> {
           child: Column(
             children: [
               Expanded(
-                    child: ListView(
-                        children: _messages.map((message) {
-                          return Padding(
-                            padding: const EdgeInsets.all(10.0),
-                            child: Container(
-                              decoration: BoxDecoration(
-                                color: Colors.white,
-                                borderRadius: BorderRadius.circular(10),
-                                boxShadow: const [
-                                  BoxShadow(color: Colors.indigo, spreadRadius: 3),
-                                ],
-                              ),
-                              child: ListTile(
-                                title: Text(message),
-                              ),
-                            ),
-                          );
-                        }).toList()
-                    ),
+                child: ListView(
+                    children: _messages.map((message) {
+                      return Padding(
+                        padding: const EdgeInsets.all(10.0),
+                        child: Container(
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(10),
+                            boxShadow: const [
+                              BoxShadow(color: Colors.indigo, spreadRadius: 3),
+                            ],
+                          ),
+                          child: ListTile(
+                            title: Text(message),
+                          ),
+                        ),
+                      );
+                    }).toList()
+                ),
               ),
               Row(
                 children: [
