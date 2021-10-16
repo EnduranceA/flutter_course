@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'homeworks/first_homework.dart';
-import 'homeworks/second_homework.dart';
+import 'homeworks/homework1/first_homework.dart';
+import 'homeworks/homework2/second_homework.dart';
 
 void main() {
   runApp(const MyApp());
@@ -24,7 +24,7 @@ final allHomeworks = [
       route: FirstHomework.routeName,
       builder: (context) => const FirstHomework()),
   Homework(
-      title: 'Домашняя работа №2',
+      title: 'Домашняя работа №2. API + State Management',
       route: SecondHomework.routeName,
       builder: (context) => const SecondHomework())
 ];
@@ -39,7 +39,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Домашние работы',
       theme: ThemeData(
-        primarySwatch: Colors.indigo,
+        primarySwatch: Colors.cyan,
       ),
       routes: allRoutes,
       home: const MyHomePage(title: 'Домашние работы'),
