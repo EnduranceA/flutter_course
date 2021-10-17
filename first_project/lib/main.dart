@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:provider/provider.dart';
 import 'homeworks/homework1/first_homework.dart';
 import 'homeworks/homework2/second_homework.dart';
+import 'homeworks/homework2/theme_store.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(MultiProvider(
+      providers: [Provider<ThemeStore>(create: (_) => ThemeStore())],
+      child: const MyApp()));
 }
 
 class Homework {
@@ -36,14 +41,13 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Домашние работы',
-      theme: ThemeData(
-        primarySwatch: Colors.cyan,
-      ),
-      routes: allRoutes,
-      home: const MyHomePage(title: 'Домашние работы'),
-    );
+    return Observer(builder: (context) {
+      return MaterialApp(
+          title: 'Домашние работы',
+          theme: context.watch<ThemeStore>().themeData,
+          routes: allRoutes,
+          home: const MyHomePage(title: 'Домашние работы'));
+    });
   }
 }
 
@@ -57,6 +61,14 @@ class MyHomePage extends StatelessWidget {
     return Scaffold(
         appBar: AppBar (
           title: Text(title),
+          actions: [
+            GestureDetector(
+              child: const Icon(Icons.assistant_photo_outlined),
+              onTap: () {
+                context.read<ThemeStore>().changeTheme();
+              },
+            )
+          ],
         ),
       body: ListView(
         children: [

@@ -1,13 +1,15 @@
+import 'package:first_project/homeworks/homework2/theme_store.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'message_store.dart';
 import 'model/message.dart';
+import 'package:provider/provider.dart';
 
 class SecondHomework extends StatefulWidget {
   const SecondHomework({Key? key}) : super(key: key);
 
-  static String routeName = '/homeworks/second_homework';
+  static String routeName = '/homeworks/homework2/second_homework';
 
   @override
   _SecondHomeworkState createState() => _SecondHomeworkState();
@@ -27,31 +29,39 @@ class _SecondHomeworkState extends State<SecondHomework> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-            title: const Text('Домашняя работа №2. API + State Management')),
-        body: SafeArea(
-            child: Center(
-                child: Column(children: [
-          Expanded(
-            child: Observer(builder: (context) {
+      appBar: AppBar(
+        title: const Text('Домашнаяя работа №2. API + State Management'),
+        actions: [
+          GestureDetector(
+            child: const Icon(Icons.assistant_photo_outlined),
+            onTap: () {
+              context.read<ThemeStore>().changeTheme();
+            },
+          )
+        ],
+      ),
+      body: SafeArea(
+        child: Column(
+          children: [
+            Expanded(child: Observer(builder: (context) {
               return ListView(
                   children: _messageStore.messages.map((message) {
                 return Padding(
                   padding: const EdgeInsets.all(10.0),
                   child: Container(
                     decoration: BoxDecoration(
-                      color: Colors.white,
                       borderRadius: BorderRadius.circular(5),
-                      boxShadow: const [
-                        BoxShadow(color: Colors.cyan, spreadRadius: 1),
-                      ],
                     ),
                     child: Row(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                       const CircleAvatar(
-                          radius: 20,
-                          backgroundImage: NetworkImage( "https://s3.o7planning.com/images/boy-128.png"),
+                        const Padding(
+                          padding: EdgeInsets.only(right: 15),
+                          child: CircleAvatar(
+                            radius: 20,
+                            backgroundImage: NetworkImage(
+                                "https://s3.o7planning.com/images/boy-128.png"),
+                          ),
                         ),
                         Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
@@ -73,35 +83,37 @@ class _SecondHomeworkState extends State<SecondHomework> {
                   ),
                 );
               }).toList());
-            }),
-          ),
-          Row(
-            children: [
-              Expanded(
-                child: Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: TextField(
-                    decoration: const InputDecoration(
-                      border: OutlineInputBorder(),
-                      hintText: 'Введите Ваше сообщение',
+            })),
+            Row(
+              children: [
+                Expanded(
+                  child: Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: TextField(
+                      decoration: const InputDecoration(
+                        border: OutlineInputBorder(),
+                        hintText: 'Введите Ваше сообщение',
+                      ),
+                      controller: _textEditingController,
                     ),
-                    controller: _textEditingController,
                   ),
                 ),
-              ),
-              GestureDetector(
-                child: const Icon(
-                  Icons.add,
-                  color: Colors.indigo,
-                  size: 50.0,
-                ),
-                onTap: () {
-                  _addMessage(_textEditingController.text);
-                },
-              )
-            ],
-          )
-        ]))));
+                GestureDetector(
+                  child: const Icon(
+                    Icons.add,
+                    color: Colors.indigo,
+                    size: 50.0,
+                  ),
+                  onTap: () {
+                    _addMessage(_textEditingController.text);
+                  },
+                )
+              ],
+            )
+          ],
+        ),
+      ),
+    );
   }
 
   void _addMessage(String text) {
