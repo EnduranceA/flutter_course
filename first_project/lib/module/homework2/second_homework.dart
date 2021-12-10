@@ -1,22 +1,24 @@
-import 'package:first_project/homeworks/homework2/theme_store.dart';
+import 'package:first_project/module/homework2/theme_store.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:flutter_modular/flutter_modular.dart';
+import 'package:styled_widget/styled_widget.dart';
 import 'message_store.dart';
 import 'model/message.dart';
-import 'package:provider/provider.dart';
 
 class SecondHomework extends StatefulWidget {
   const SecondHomework({Key? key}) : super(key: key);
 
-  static String routeName = '/homeworks/homework2/second_homework';
+  static String routeName = '/second_homework';
 
   @override
   _SecondHomeworkState createState() => _SecondHomeworkState();
 }
 
 class _SecondHomeworkState extends State<SecondHomework> {
-  final MessageStore _messageStore = MessageStore();
+  final MessageStore _messageStore = Modular.get<MessageStore>();
+  final ThemeStore _themeStore = Modular.get<ThemeStore>();
 
   final TextEditingController _textEditingController = TextEditingController();
 
@@ -35,7 +37,7 @@ class _SecondHomeworkState extends State<SecondHomework> {
           GestureDetector(
             child: const Icon(Icons.assistant_photo_outlined),
             onTap: () {
-              context.read<ThemeStore>().changeTheme();
+              _themeStore.changeTheme();
             },
           )
         ],
@@ -66,13 +68,13 @@ class _SecondHomeworkState extends State<SecondHomework> {
                         Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text(
-                                message.author,
-                                style: const TextStyle(
-                                    fontSize: 16.0,
-                                    fontStyle: FontStyle.normal,
-                                    fontWeight: FontWeight.bold),
-                              ),
+                              Text(message.author)
+                                  .textColor(Colors.blueAccent)
+                                  .fontSize(16.0)
+                                  .fontWeight(FontWeight.bold)
+                                  .width(100, animate: true)
+                                  .animate(const Duration(milliseconds: 300),
+                                      Curves.linear),
                               const SizedBox(
                                 height: 5,
                               ),

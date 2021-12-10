@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class FirstHomework extends StatefulWidget {
   const FirstHomework({Key? key}) : super(key: key);
 
-  static String routeName = '/homeworks/homework1/first_homework';
+  static String routeName = '/first_homework';
 
   @override
   _FirstHomeworkState createState() => _FirstHomeworkState();

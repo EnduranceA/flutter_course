@@ -1,10 +1,10 @@
 import 'package:dio/dio.dart';
-import 'package:first_project/homeworks/homework2/model/message.dart';
+import 'package:first_project/module/homework2/model/message.dart';
 import 'package:mobx/mobx.dart';
 
 import 'api_client.dart';
 
-part "message_store.g.dart";
+part 'message_store.g.dart';
 
 class MessageStore = _MessageStore with _$MessageStore;
 
