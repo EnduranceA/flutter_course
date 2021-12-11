@@ -23,10 +23,11 @@ class _DetailInfoState extends State<DetailInfo> {
       ),
       body: SafeArea(
           child: Center(
-        child: Padding(
-            padding: const EdgeInsets.all(10.0),
-            child: InteractiveViewer(child: widget.img.image)),
-      )),
+              child: Padding(
+                  padding: const EdgeInsets.all(10.0),
+                  child: Hero(
+                      tag: widget.img.name,
+                      child: InteractiveViewer(child: widget.img.image))))),
     );
   }
 }
