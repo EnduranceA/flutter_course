@@ -70,7 +70,7 @@ class _ThirdHomeworkState extends State<ThirdHomework> {
                         padding: const EdgeInsets.all(30.0),
                         child: GestureDetector(
                             onTap: () {
-                              Modular.to.pushNamed('/third_homework/detail', arguments: img);
+                              Modular.to.pushNamed('/third_homework/detail_info', arguments: img);
                             },
                             child: Center(
                                 child: Hero(

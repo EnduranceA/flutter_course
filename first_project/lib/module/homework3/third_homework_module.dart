@@ -11,7 +11,7 @@ class ThirdHomeworkModule extends Module {
   @override
   List<ModularRoute> get routes => [
         ChildRoute('/', child: (context, args) => const ThirdHomework()),
-        ChildRoute('/detail',
+        ChildRoute('/detail_info',
             child: (context, args) => DetailInfo(img: args.data),
             transition: TransitionType.leftToRightWithFade)
       ];
