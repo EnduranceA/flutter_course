@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
-import 'homeworks/first_homework.dart';
-import 'homeworks/second_homework.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:provider/provider.dart';
+import 'homeworks/homework1/first_homework.dart';
+import 'homeworks/homework2/second_homework.dart';
+import 'homeworks/homework2/theme_store.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(MultiProvider(
+      providers: [Provider<ThemeStore>(create: (_) => ThemeStore())],
+      child: const MyApp()));
 }
 
 class Homework {
@@ -24,7 +29,7 @@ final allHomeworks = [
       route: FirstHomework.routeName,
       builder: (context) => const FirstHomework()),
   Homework(
-      title: 'Домашняя работа №2',
+      title: 'Домашняя работа №2. API + State Management',
       route: SecondHomework.routeName,
       builder: (context) => const SecondHomework())
 ];
@@ -36,14 +41,13 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Домашние работы',
-      theme: ThemeData(
-        primarySwatch: Colors.indigo,
-      ),
-      routes: allRoutes,
-      home: const MyHomePage(title: 'Домашние работы'),
-    );
+    return Observer(builder: (context) {
+      return MaterialApp(
+          title: 'Домашние работы',
+          theme: context.watch<ThemeStore>().themeData,
+          routes: allRoutes,
+          home: const MyHomePage(title: 'Домашние работы'));
+    });
   }
 }
 
@@ -57,7 +61,15 @@ class MyHomePage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar (
         title: Text(title),
-      ),
+      actions: [
+            GestureDetector(
+              child: const Icon(Icons.assistant_photo_outlined),
+              onTap: () {
+                context.read<ThemeStore>().changeTheme();
+              },
+            )
+          ],
+        ),
       body: ListView(
         children: [
           ...allHomeworks.map((h) => HomeworkTile(homework: h))
