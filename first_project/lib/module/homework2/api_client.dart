@@ -1,4 +1,4 @@
-import 'package:first_project/homeworks/homework2/model/message.dart';
+import 'package:first_project/module/homework2/model/message.dart';
 import 'package:retrofit/retrofit.dart';
 import 'package:dio/dio.dart';
 
