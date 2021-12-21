@@ -1,5 +1,4 @@
 import 'package:first_project/module/homework2/theme_store.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -57,7 +56,7 @@ class _SecondHomeworkState extends State<SecondHomework> {
                     child: Row(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const Padding(
+                         const Padding(
                           padding: EdgeInsets.only(right: 15),
                           child: CircleAvatar(
                             radius: 20,
@@ -68,13 +67,18 @@ class _SecondHomeworkState extends State<SecondHomework> {
                         Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text(message.author)
-                                  .textColor(Colors.blueAccent)
-                                  .fontSize(16.0)
-                                  .fontWeight(FontWeight.bold)
-                                  .width(100, animate: true)
-                                  .animate(const Duration(milliseconds: 300),
-                                      Curves.linear),
+                              GestureDetector(
+                                  child: Text(message.author)
+                                      .textColor(Colors.blueAccent)
+                                      .fontSize(16.0)
+                                      .fontWeight(FontWeight.bold)
+                                      .width(100, animate: true)
+                                      .animate(
+                                          const Duration(milliseconds: 300),
+                                          Curves.linear),
+                                  onTap: () {
+                                    Modular.to.pushNamed('/second_homework/detail', arguments: message);
+                                  },),
                               const SizedBox(
                                 height: 5,
                               ),

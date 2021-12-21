@@ -1,6 +1,11 @@
-import 'package:first_project/app_module.dart';
+
+
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+
+import 'app_module.dart';
+import 'module/homework2/theme_store.dart';
 
 void main() {
   runApp(ModularApp(module: AppModule(), child: const MyApp()));
@@ -11,8 +16,11 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      title: 'Домашние работы',
-    ).modular();
+    return Observer(builder: (context){
+      return MaterialApp(
+        theme: Modular.get<ThemeStore>().themeData,
+        title: 'Домашние работы',
+      ).modular();
+    });
   }
 }

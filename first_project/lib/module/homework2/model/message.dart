@@ -4,15 +4,13 @@ part 'message.g.dart';
 
 @JsonSerializable()
 class Message {
-
-  Message({
-    required this.author,
-    required this.message
-  });
+  Message({required this.author, required this.message});
 
   String author;
   String message;
 
-  factory Message.fromJson(Map<String, dynamic> json) => _$MessageFromJson(json);
+  factory Message.fromJson(Map<String, dynamic> json) =>
+      _$MessageFromJson(json);
+
   Map<String, dynamic> toJson() => _$MessageToJson(this);
 }
